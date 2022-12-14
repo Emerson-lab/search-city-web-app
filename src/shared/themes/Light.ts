@@ -5,12 +5,12 @@ export const LightTheme = createTheme({
     primary: {
       main: "#834781",
       dark: "#6B3267",
-      // light:,
+      // light: "red",
       contrastText: "#fff",
     },
     background: {
       paper: "#fff",
       default: "#f7f6f3"
-    }
+    },
   }
 })
