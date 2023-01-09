@@ -7,9 +7,11 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  useMediaQuery,
   useTheme
 } from "@mui/material";
 import { Box } from "@mui/system";
+import { useDrawerContext } from "../../contexts";
 
 interface IThemeProviderProps {
   children: React.ReactNode
@@ -17,10 +19,16 @@ interface IThemeProviderProps {
 
 export const MenuLateral: React.FC<IThemeProviderProps> = ({ children }) => {
   const theme = useTheme();
+  const isSmDown = useMediaQuery(theme.breakpoints.down('sm'))
+  const { isDrawerOpenContext, toggleDrawerOpenContext } = useDrawerContext()
 
   return (
     <>
-      <Drawer variant="permanent">
+      <Drawer
+        open={isDrawerOpenContext}
+        variant={isSmDown ? "temporary" : "permanent"}
+        onClose={toggleDrawerOpenContext}
+      >
 
         <Box
           width={theme.spacing(28)}
@@ -60,7 +68,7 @@ export const MenuLateral: React.FC<IThemeProviderProps> = ({ children }) => {
 
       <Box
         height="100vh"
-        marginLeft={theme.spacing(28)}
+        marginLeft={isSmDown ? 0 : theme.spacing(28)}
       >
         {children}
       </Box>
