@@ -1,14 +1,23 @@
-import { Icon, IconButton, Theme, Typography, useMediaQuery, useTheme } from "@mui/material";
+import {
+  Icon,
+  IconButton,
+  Theme,
+  Typography,
+  useMediaQuery,
+  useTheme
+} from "@mui/material";
 import { Box } from "@mui/system";
 import { useDrawerContext } from "../contexts";
 
 type ILayoutPageBaseProps = {
   children: React.ReactNode;
   titulo: string;
+  barraDeFerramentas: React.ReactNode;
 }
 
-export const LayoutBaseDePagina = ({ children, titulo }: ILayoutPageBaseProps) => {
+export const LayoutBaseDePagina = ({ children, titulo, barraDeFerramentas }: ILayoutPageBaseProps) => {
   const isSmDown = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
+  const isMdDown = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
   const theme = useTheme();
 
   const { toggleDrawerOpenContext } = useDrawerContext();
@@ -24,7 +33,7 @@ export const LayoutBaseDePagina = ({ children, titulo }: ILayoutPageBaseProps) =
         padding={1}
         display="flex"
         alignItems="center"
-        height={theme.spacing(12)}
+        height={theme.spacing(isSmDown ? 6 : isMdDown ? 8 : 12)}
         gap={1}
       >
         {isSmDown ?
@@ -34,16 +43,26 @@ export const LayoutBaseDePagina = ({ children, titulo }: ILayoutPageBaseProps) =
           :
           null}
 
-        <Typography variant="h5">
+        <Typography
+          variant={isSmDown ? "h5" : isMdDown ? 'h4' : 'h3'}
+          whiteSpace="nowrap"
+          overflow="hidden"
+          textOverflow="ellipsis"
+        >
           {titulo}
         </Typography>
       </Box>
 
-      <Box>
-        Barra de ferramentas
-      </Box>
+      {
+        barraDeFerramentas ?
+          <Box>
+            {barraDeFerramentas}
+          </Box>
+          :
+          null
+      }
 
-      <Box>
+      <Box flex={1} overflow="auto">
         {children}
       </Box>
     </Box>
