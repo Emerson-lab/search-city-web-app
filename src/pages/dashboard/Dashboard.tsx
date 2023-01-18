@@ -8,6 +8,8 @@ export const Dashboard = () => {
       barraDeFerramentas={
         <FerramentaDeDetalhe
           mostrarBotaoSalvarEFechar
+          mostrarBotaoNovo
+
         />
       }
     >
