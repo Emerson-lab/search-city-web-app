@@ -1,3 +1,6 @@
 {
-  "pessoa": []
+  "pessoas": [
+    { "id": 1, "nome": "Bart" },
+    { "id": 2, "nome": "Lisa" }
+  ]
 }
