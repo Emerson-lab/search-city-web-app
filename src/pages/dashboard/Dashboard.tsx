@@ -9,7 +9,6 @@ export const Dashboard = () => {
         <FerramentaDeDetalhe
           mostrarBotaoSalvarEFechar
           mostrarBotaoNovo
-
         />
       }
     >
