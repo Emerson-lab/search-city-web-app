@@ -1,10 +1,9 @@
 import {
-  Paper,
+  LinearProgress, Paper,
   Table,
   TableBody,
   TableCell,
-  TableContainer,
-  TableHead,
+  TableContainer, TableFooter, TableHead,
   TableRow
 } from '@mui/material';
 import { useEffect, useMemo, useState } from "react";
@@ -81,6 +80,26 @@ export const ListagemDePessoas: React.FC = () => {
               </TableRow>
             ))}
           </TableBody>
+
+          {totalCount === 0 && !isLoading ?
+            <caption>Nenhum registro encontrado.</caption>
+            :
+            null
+          }
+
+          <TableFooter>
+            {isLoading ?
+              <TableRow>
+                <TableCell colSpan={3}>
+                  <LinearProgress
+                    variant='indeterminate'
+                  />
+                </TableCell>
+              </TableRow>
+              :
+              null
+            }
+          </TableFooter>
         </Table>
       </TableContainer>
     </LayoutBaseDePagina>
