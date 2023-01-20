@@ -109,7 +109,7 @@ export const FerramentaDeDetalhe: React.FC<IFerramentaDeDetalheprops> = ({
             variant="button"
             noWrap
           >
-            Salvar e voltar
+            Salvar e fechar
           </Typography>
         </Button>
         :

@@ -1,6 +1,16 @@
 {
   "pessoas": [
-    { "id": 1, "nome": "Bart" },
-    { "id": 2, "nome": "Lisa" }
+    {
+      "id": 1,
+      "email": "Bart@lock.com",
+      "cidadeId": 1,
+      "nomeCompleto": "Bart Simpson"
+    },
+    {
+      "id": 2,
+      "email": "Lisa@music.com",
+      "cidadeId": 1,
+      "nomeCompleto": "Lisa Simpson"
+    }
   ]
 }
