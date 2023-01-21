@@ -1,5 +1,5 @@
 import {
-  LinearProgress, Pagination, Paper,
+  Icon, IconButton, LinearProgress, Pagination, Paper,
   Table,
   TableBody,
   TableCell,
@@ -9,7 +9,7 @@ import {
   TableRow
 } from '@mui/material';
 import { useEffect, useMemo, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { FerramentasDaListagem } from "../../shared/components";
 import { Enviroment } from '../../shared/environments';
@@ -20,6 +20,7 @@ import { IListagemPessoa, PessoasServices } from "../../shared/services/api/pess
 export const ListagemDePessoas: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { debounce } = useDebounce();
+  const navigate = useNavigate();
 
   const [rows, setRows] = useState<IListagemPessoa[]>([]);
   const [totalCount, setTotalCount] = useState(0);
@@ -53,6 +54,23 @@ export const ListagemDePessoas: React.FC = () => {
     })
   }, [busca, pagina]);
 
+  const handleDelete = (id: number) => {
+    if (window.confirm('Realmente deseja apagar?')) {
+      PessoasServices.deleteById(id)
+        .then(result => {
+          if (result instanceof Error) {
+            alert(result.message);
+          } else {
+            setRows(oldRows => [
+              ...oldRows.filter(ldRow => ldRow.id !== id)
+            ]
+            )
+            alert('Registro apagado com sucesso!');
+          }
+        })
+    }
+  }
+
   return (
     <LayoutBaseDePagina
       titulo="Listagem de pessoas"
@@ -61,7 +79,12 @@ export const ListagemDePessoas: React.FC = () => {
           textBotaoNovo="Nova"
           mostrarInputBusca
           textoDaBusca={busca}
-          aoMudarTextoDeBusca={texto => setSearchParams({ busca: texto, pagina: '1' }, { replace: true })}
+          aoClicarEmNovo={() => navigate('/pessoas/detalhe/nova')}
+          aoMudarTextoDeBusca={texto =>
+            setSearchParams(
+              { busca: texto, pagina: '1' },
+              { replace: true }
+            )}
         />
       }
     >
@@ -81,7 +104,20 @@ export const ListagemDePessoas: React.FC = () => {
           <TableBody>
             {rows.map(row => (
               <TableRow key={row.id}>
-                <TableCell>Ações</TableCell>
+                <TableCell>
+                  <IconButton
+                    onClick={() => handleDelete(row.id)}
+                    size="small"
+                  >
+                    <Icon>delete</Icon>
+                  </IconButton>
+                  <IconButton
+                    onClick={() => navigate(`/pessoas/detalhe/${row.id}`)}
+                    size="small"
+                  >
+                    <Icon>edit</Icon>
+                  </IconButton>
+                </TableCell>
                 <TableCell>{row.nomeCompleto}</TableCell>
                 <TableCell>{row.email}</TableCell>
               </TableRow>
