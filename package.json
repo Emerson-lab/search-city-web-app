@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@mui/icons-material": "^5.10.16",
+    "@unform/core": "^2.1.6",
+    "@unform/web": "^2.1.6",
     "axios": "^1.2.3",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",

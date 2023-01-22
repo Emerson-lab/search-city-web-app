@@ -1,4 +1,5 @@
-import LinearProgress from "@mui/material/LinearProgress";
+import { TextField } from "@mui/material";
+import { Form } from "@unform/web";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FerramentaDeDetalhe } from "../../shared/components";
@@ -46,6 +47,10 @@ export const DetalhesDePessoas: React.FC = () => {
     }
   }
 
+  const handleSave = () => {
+
+  }
+
   return (
     <LayoutBaseDePagina
       titulo={id === 'nova' ? 'Nova pessoa' : nome}
@@ -64,11 +69,14 @@ export const DetalhesDePessoas: React.FC = () => {
         />
       }
     >
-      {isLoading ?
-        <LinearProgress variant="indeterminate" />
-        :
-        <p>detalhe pessoa {id}</p>
-      }
+      <Form
+        onSubmit={console.log}
+      >
+        <TextField
+
+        />
+
+      </Form>
     </LayoutBaseDePagina>
   )
 };
