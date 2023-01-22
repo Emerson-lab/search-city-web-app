@@ -84,5 +84,19 @@
       "cidadeId": 15,
       "nomeCompleto": "Lisa Simpson"
     }
+  ],
+  "visitas": [
+    { "id": 1, "dataDaVista": "29-08-1992", "nrvisitas": 12 },
+    { "id": 2, "dataDaVista": "01-01-2000", "nrvisitas": 8 },
+    { "id": 3, "dataDaVista": "15-07-2005", "nrvisitas": 20 },
+    { "id": 4, "dataDaVista": "01-01-2010", "nrvisitas": 15 },
+    { "id": 5, "dataDaVista": "01-01-2015", "nrvisitas": 18 },
+    { "id": 6, "dataDaVista": "01-01-2020", "nrvisitas": 25 },
+    { "id": 7, "dataDaVista": "01-01-2021", "nrvisitas": 30 },
+    { "id": 8, "dataDaVista": "01-02-2021", "nrvisitas": 35 },
+    { "id": 9, "dataDaVista": "01-03-2021", "nrvisitas": 40 },
+    { "id": 10, "dataDaVista": "01-04-2021", "nrvisitas": 45 },
+    { "id": 11, "dataDaVista": "01-05-2021", "nrvisitas": 50 },
+    { "id": 12, "dataDaVista": "01-06-2021", "nrvisitas": 55 }
   ]
 }

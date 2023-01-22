@@ -1,8 +1,8 @@
-import { TextField } from "@mui/material";
 import { Form } from "@unform/web";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FerramentaDeDetalhe } from "../../shared/components";
+import { VTextField } from "../../shared/forms/VTextField";
 import { LayoutBaseDePagina } from "../../shared/layouts";
 import { PessoasServices } from "../../shared/services/api/pessoas/PessoasServices";
 
@@ -71,9 +71,10 @@ export const DetalhesDePessoas: React.FC = () => {
     >
       <Form
         onSubmit={console.log}
+        initialData={{}}
       >
-        <TextField
-
+        <VTextField
+          name="nomeCompleto"
         />
 
       </Form>
