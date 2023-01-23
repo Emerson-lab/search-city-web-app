@@ -1,53 +1,50 @@
 import { useEffect, useState } from "react";
-import Chart from 'react-apexcharts';
+import ApexChart from 'react-apexcharts';
 import { FerramentaDeDetalhe } from "../../shared/components";
 import { LayoutBaseDePagina } from "../../shared/layouts";
-import { VisitasServices } from "../../shared/services/api/visitas/VisitasServices";
+import { IVisita, VisitasServices } from "../../shared/services/api/visitas/VisitasServices";
 
 export const Dashboard = () => {
-
-  const [nomeDoMesDaVisita, setNomeDoMesDaVisita] = useState<any>([]);
-  const [numeroDeVisitas, setNumeroDeVisitas] = useState<number[]>([]);
-
-  const arrayDomes = nomeDoMesDaVisita
-  const arrayDoNrVisitas = numeroDeVisitas
+  const [data, setData] = useState<IVisita[]>([]);
 
   useEffect(() => {
-
-    const mesDaVisita: string[] = []
-    const numeroDeVisitas: number[] = []
-
     VisitasServices.getAllVisitas()
       .then((result) => {
         if (result instanceof Error) {
           alert(result.message);
         } else {
-          console.log('[result]', result);
+          // console.log('[result-data]', data);
 
-
-          for (let i = 0; i < result.data.length; i++) {
-
-            mesDaVisita.push(result?.data[i].dataDaVista);
-            numeroDeVisitas.push(result?.data[i].nrvisitas);
-
-          }
-          setNumeroDeVisitas(numeroDeVisitas);
-          setNomeDoMesDaVisita(mesDaVisita);
+          setData(result.data);
         }
       })
   }, []);
 
-  const OpitionsChartLine = {
+  const options = {
+    xaxis: {
+      categories: data.map(item => (item.x))
+    },
+    colors: ['#5c1868'],
 
+    fill: {
+      colors: ['#9C27B0'],
+      type: 'gradient'
+    },
+
+    yaxis: {
+      tooltip: {
+        enabled: true,
+      }
+    }
   }
 
-  const SeriesChsrtLine = [{
+  const series = [{
     name: "visitas",
-    data: arrayDoNrVisitas
+    data: data.map((item) => (item.y))
   }]
 
-  console.log('[arrayDomes]', arrayDomes);
-  console.log('[arrayDoNrVisitas]', arrayDoNrVisitas);
+  // console.log('[arrayDomes]', arrayDomes);
+  // console.log('[arrayDoNrVisitas]', arrayDoNrVisitas);
 
   return (
     <LayoutBaseDePagina
@@ -59,14 +56,14 @@ export const Dashboard = () => {
         />
       }
     >
-      <Chart
+      <ApexChart
+        options={options}
+        series={series}
         type="area"
-        width={700}
+        width={900}
         height={500}
-        series={SeriesChsrtLine}
-        options={OpitionsChartLine}
 
-      ></Chart>
+      ></ApexChart>
 
     </LayoutBaseDePagina>
 

@@ -1,9 +1,9 @@
 import { Api } from "../axios-config";
 
 export interface IVisita {
-  id: number;
-  dataDaVista: string;
-  nrvisitas: number;
+
+  x: string;
+  y: number;
 }
 
 type TVisitas = {
